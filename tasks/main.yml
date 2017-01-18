@@ -2,15 +2,3 @@
 - name: Include relevant OS tasks
   include: "{{ ansible_os_family }}.yml"
 
-- name: Download install script
-  get_url:
-    url: https://s3.amazonaws.com/download/draois.com/stable/install-sysdig
-    dest: /tmp/install-sysdig
-
-- name: Run install script
-  script: /tmp/install-sysdig
-
-- name: Delete install script
-  file:
-    path: /tmp/install-sysdig
-    state: absent

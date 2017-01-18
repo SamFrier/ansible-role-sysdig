@@ -1,3 +1,29 @@
 ---
-# Placeholder
+- name: Add apt key
+  apt_key:
+    url: https://s3.amazonaws.com/download.draios.com/DRAIOS-GPG-KEY.public
+    state: present
+
+- name: Download package list
+  get_url:
+    url: http://download.draios.com/stable/deb/draios.list
+    dest: /etc/apt/sources.list.d/draios.list
+
+- name: Update apt cache
+  apt:
+    update_cache: yes
+
+- name: Get kernel release
+  command: uname -r
+  register: kernel_release
+
+- name: Install kernel headers
+  apt:
+    name: "linux-headers-{{ kernel_release.stdout }}"
+    state: present
+
+- name: Install sysdig
+  apt: 
+    name: sysdig
+    state: present
 
