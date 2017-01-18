@@ -1,0 +1,6 @@
+---
+- name: Include relevant OS tasks
+  include: "{{ ansible_os_family }}.yml"
+
+- name: Download + run install script
+  shell: curl https://s3.amazonaws.com/download/draois.com/stable/install-sysdig | bash
