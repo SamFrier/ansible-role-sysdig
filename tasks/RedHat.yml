@@ -1,3 +1,22 @@
 ---
-# TODO
+- name: Add rpm key
+  rpm_key:
+    state: present
+    key: https://s3.amazonaws.com/download.draios.com/DRAIOS-GPG-KEY.public
 
+- name: Configure yum repository
+  get_url:
+    url: http://download.draios.com/stable/rpm/draios.repo
+    dest: /etc/yum.repos.d/draios.repo
+
+# - name: Install EPEL repository
+
+- name: Install kernel headers
+  yum:
+    name: "kernel-devel-{{ kernel_release.stdout }}"
+    state: present
+
+- name: Install sysdig
+  yum:
+    name: sysdig
+    state: present

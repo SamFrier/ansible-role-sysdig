@@ -1,4 +1,8 @@
 ---
+- name: Get kernel release
+  command: uname -r
+  register: kernel_release
+
 - name: Include relevant OS tasks
   include: "{{ ansible_os_family }}.yml"
 

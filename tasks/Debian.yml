@@ -13,10 +13,6 @@
   apt:
     update_cache: yes
 
-- name: Get kernel release
-  command: uname -r
-  register: kernel_release
-
 - name: Install kernel headers
   apt:
     name: "linux-headers-{{ kernel_release.stdout }}"
